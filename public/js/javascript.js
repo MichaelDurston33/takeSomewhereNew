@@ -1,4 +1,5 @@
 
+//the initial location the map is set to.
 latitude = 54.38749845;
 longitude = -1.391831766;
 
@@ -32,6 +33,8 @@ function scrollToTop () {
   elmnt.scrollIntoView({ block: 'start',  behavior: 'smooth' });
 }
 
+
+//Initialises the map and lets you style certain aspects.
 function initMap() {
   var markerDestination = {lat: latitude, lng: longitude};
     var map = new google.maps.Map(
@@ -122,7 +125,7 @@ function initMap() {
           var marker = new google.maps.Marker({position: markerDestination, map: map});
 
         }
-  // The marker, positioned at Uluru
+  // The marker, positioned at The North East of England.
 
   function getCountryName() {
     var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude +',' + longitude + '&key=AIzaSyBqMrtWfG-GmbUXzMrE0-UFZo7DsH1dLhM'
@@ -136,7 +139,12 @@ function initMap() {
           arr.push(result.results[i].formatted_address)
         }
 
+//gets the province location from the returned google map API. Does this by eliminating
+//extrenuous information via reducing the arr length by 2.
         var provinceLocation = arr[arr.length - 2];
+
+//checks if the length is successful and a reasonable length. If not, tells the
+//user they've landed in the ocean. As this is most likely the case.
 
       if(lengthOfResult !== 0 & provinceLocation !== undefined) {
           document.getElementById('titleForWikiback').innerHTML = provinceLocation;
